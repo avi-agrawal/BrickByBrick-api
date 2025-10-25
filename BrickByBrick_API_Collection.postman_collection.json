@@ -1,0 +1,1059 @@
+{
+  "info": {
+    "name": "BrickByBrick API Collection",
+    "description": "Comprehensive API collection for testing the BrickByBrick learning tracking application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:7007",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/verify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "verify"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Google OAuth Initiate",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/google",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "google"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GitHub OAuth Initiate",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/github",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "github"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify OAuth Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{authToken}}\",\n  \"provider\": \"google\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/verify-oauth",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "verify-oauth"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "stats"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Problems",
+      "item": [
+        {
+          "name": "Get User Problems",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/problems",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "problems"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Problem",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Two Sum\",\n  \"platform\": \"LeetCode\",\n  \"difficulty\": \"easy\",\n  \"topic\": \"Arrays\",\n  \"subtopic\": \"Two Pointers\",\n  \"timeSpent\": 30,\n  \"outcome\": \"solved\",\n  \"date\": \"2024-01-15\",\n  \"link\": \"https://leetcode.com/problems/two-sum\",\n  \"tags\": [\"array\", \"hash-table\"],\n  \"approachNotes\": \"Used hash map for O(n) solution\",\n  \"codeLink\": \"https://github.com/user/solutions/two-sum\",\n  \"isRevision\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/problems",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "problems"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Problem by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/problems/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "problems", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Problem",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Two Sum - Updated\",\n  \"outcome\": \"solved\",\n  \"timeSpent\": 25,\n  \"approachNotes\": \"Updated approach with better solution\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/problems/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "problems", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Problem",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/problems/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "problems", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Learning Items",
+      "item": [
+        {
+          "name": "Get User Learning Items",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/learning-items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "learning-items"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Learning Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"React Fundamentals Course\",\n  \"type\": \"course\",\n  \"category\": \"Web Development\",\n  \"subtopic\": \"React Hooks\",\n  \"timeSpent\": 120,\n  \"progress\": 75,\n  \"status\": \"in-progress\",\n  \"date\": \"2024-01-15\",\n  \"link\": \"https://react.dev/learn\",\n  \"tags\": \"react, javascript, frontend\",\n  \"notes\": \"Learning about useState and useEffect\",\n  \"resourceLink\": \"https://github.com/user/react-notes\",\n  \"isRevision\": false,\n  \"difficulty\": \"intermediate\",\n  \"platform\": \"React Documentation\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/learning-items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "learning-items"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Learning Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/learning-items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "learning-items", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Learning Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"progress\": 90,\n  \"status\": \"completed\",\n  \"timeSpent\": 150,\n  \"notes\": \"Completed the course successfully\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/learning-items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "learning-items", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Learning Item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/learning-items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "learning-items", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Revision Items",
+      "item": [
+        {
+          "name": "Get User Revision Items",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/revision-items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "revision-items"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Revision Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"1\",\n  \"itemType\": \"problem\",\n  \"originalDate\": \"2024-01-15\",\n  \"nextRevisionDate\": \"2024-01-18\",\n  \"revisionCycle\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/revision-items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "revision-items"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Revision Agenda",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/revision-items/agenda?userId={{userId}}&date=2024-01-20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "revision-items", "agenda"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "date",
+                  "value": "2024-01-20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Complete Revision Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/revision-items/1/complete",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "revision-items", "1", "complete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Revision Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/revision-items/stats?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "revision-items", "stats"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Roadmaps",
+      "item": [
+        {
+          "name": "Get User Roadmaps",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/roadmaps",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "roadmaps"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Roadmap",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Full Stack Web Development\",\n  \"description\": \"Complete roadmap for becoming a full stack developer\",\n  \"color\": \"#3B82F6\",\n  \"isPublic\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/roadmaps",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "roadmaps"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Roadmap by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/roadmaps/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "roadmaps", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Roadmap",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Full Stack Web Development - Updated\",\n  \"description\": \"Updated roadmap with latest technologies\",\n  \"color\": \"#10B981\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/roadmaps/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "roadmaps", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Roadmap",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/roadmaps/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "roadmaps", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Topics",
+      "item": [
+        {
+          "name": "Create Topic",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Frontend Fundamentals\",\n  \"description\": \"Learn HTML, CSS, and JavaScript basics\",\n  \"order\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/roadmaps/1/topics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "roadmaps", "1", "topics"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Topic by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/topics/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "topics", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Topic",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Frontend Fundamentals - Updated\",\n  \"description\": \"Updated description with more details\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/topics/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "topics", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Complete Topic",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/topics/1/complete",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "topics", "1", "complete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Uncomplete Topic",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/topics/1/uncomplete",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "topics", "1", "uncomplete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Topic",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/topics/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "topics", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subtopics",
+      "item": [
+        {
+          "name": "Create Subtopic",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"HTML Basics\",\n  \"description\": \"Learn HTML structure and semantic elements\",\n  \"order\": 1,\n  \"difficulty\": \"beginner\",\n  \"estimatedTime\": 120\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/topics/1/subtopics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "topics", "1", "subtopics"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Subtopic by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/subtopics/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "subtopics", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Subtopic",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"HTML Basics - Advanced\",\n  \"description\": \"Advanced HTML concepts and best practices\",\n  \"difficulty\": \"intermediate\",\n  \"estimatedTime\": 180\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subtopics/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "subtopics", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Complete Subtopic",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/subtopics/1/complete",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "subtopics", "1", "complete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Uncomplete Subtopic",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/subtopics/1/uncomplete",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "subtopics", "1", "uncomplete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Subtopic",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/subtopics/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "subtopics", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get Basic Analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/analytics?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "analytics"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Analytics with Timeframe",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/analytics?userId={{userId}}&timeframe=monthly",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "analytics"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "timeframe",
+                  "value": "monthly"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Advanced Analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/analytics/advanced?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "analytics", "advanced"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Analytics with Date Range",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/analytics?userId={{userId}}&startDate=2024-01-01&endDate=2024-01-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "analytics"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "startDate",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-01-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Reset Database",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/reset-db",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "reset-db"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
