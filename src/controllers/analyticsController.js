@@ -495,6 +495,17 @@ const getAnalytics = async (req, res) => {
         completedRoadmaps
       },
 
+      // Added compact stats for problems screen
+      problemStats: {
+        totalProblems,
+        weeklySolved,
+        currentStreak,
+        successRate,
+        weeklyChange,
+        streakChange,
+        rateChange
+      },
+
       performanceMetrics: {
         dailyActivity,
         weeklyProgress,

@@ -19,6 +19,16 @@ const analyticsRoutes = require('./analyticsRoutes');
 
 const router = express.Router();
 
+// Debug middleware to log route matching
+router.use('/api/*', (req, res, next) => {
+  console.log(`Route Debug: ${req.method} ${req.originalUrl}`);
+  console.log('Headers:', Object.keys(req.headers));
+  if (req.headers.authorization) {
+    console.log('Auth header present:', req.headers.authorization.substring(0, 20) + '...');
+  }
+  next();
+});
+
 // ========== HEALTH CHECK ==========
 
 /**
@@ -35,14 +45,14 @@ router.get('/health', (req, res) => {
 
 // ========== API ROUTES ==========
 
-// Mount all route modules
+// Mount all route modules with specific paths to avoid conflicts
 router.use('/api/auth', authRoutes);
 router.use('/api/users', userRoutes);
-router.use('/api', problemRoutes);
-router.use('/api', learningRoutes);
-router.use('/api', revisionRoutes);
-router.use('/api', roadmapRoutes);
-router.use('/api', analyticsRoutes);
+router.use('/api/analytics', analyticsRoutes);
+router.use('/api/problems', problemRoutes);
+router.use('/api/learning', learningRoutes);
+router.use('/api/revision', revisionRoutes);
+router.use('/api/roadmap', roadmapRoutes);
 
 // ========== ERROR HANDLING ==========
 

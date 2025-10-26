@@ -12,6 +12,14 @@ const { getAnalytics } = require('../controllers/analyticsController');
 
 const router = express.Router();
 
+// Debug middleware for analytics routes
+router.use((req, res, next) => {
+  console.log(`Analytics Route: ${req.method} ${req.originalUrl}`);
+  console.log('Query params:', req.query);
+  console.log('Auth header:', req.headers.authorization ? 'Present' : 'Missing');
+  next();
+});
+
 // ========== ANALYTICS ROUTES ==========
 
 /**

@@ -16,6 +16,7 @@ const { User } = require('../models');
  */
 const authenticateToken = async (req, res, next) => {
   try {
+    console.log("authenticateToken");
     // Extract token from Authorization header
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;

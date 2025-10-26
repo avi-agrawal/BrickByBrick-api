@@ -5,7 +5,7 @@
  * for API endpoints.
  */
 
-const { body, param, query, validationResult } = require('express-validator');
+const { body, param, query, validationResult, oneOf } = require('express-validator');
 
 /**
  * Handle validation errors
@@ -100,12 +100,16 @@ const validateProblemCreation = [
     .withMessage('Invalid outcome'),
   
   body('link')
-    .optional()
+    // .optional({ checkFalsy: true, nullable: true })
+    .customSanitizer(v => (v === "" ? undefined : v?.trim()))
+    .if((value) => value !== undefined)    // Only validate if value exists after sanitizer
     .isURL()
     .withMessage('Invalid URL format'),
   
   body('codeLink')
-    .optional()
+    // .optional({ checkFalsy: true, nullable: true })
+    .customSanitizer(v => (v === "" ? undefined : v?.trim()))
+    .if((value) => value !== undefined)    // Only validate if value exists after sanitizer
     .isURL()
     .withMessage('Invalid URL format'),
   
@@ -234,9 +238,19 @@ const validateSubtopic = [
  * ID parameter validation
  */
 const validateId = [
-  param('id')
-    .isInt({ min: 1 })
-    .withMessage('Invalid ID parameter'),
+  oneOf([
+    param('id')
+      .isInt({ min: 1 })
+      .withMessage('Invalid ID parameter'),
+    
+    param('roadmapId')
+      .isInt({ min: 1 })
+      .withMessage('Invalid ID parameter'),
+
+    param('topicId')
+      .isInt({ min: 1 })
+      .withMessage('Invalid topic ID parameter')
+  ]),
   
   handleValidationErrors
 ];
